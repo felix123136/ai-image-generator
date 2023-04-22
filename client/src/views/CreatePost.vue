@@ -109,13 +109,16 @@ export default {
       if (this.form.prompt && this.form.photo) {
         this.loading = true;
         try {
-          const response = await fetch('http://localhost:8080/api/v1/post', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.form),
-          });
+          const response = await fetch(
+            'https://ai-image-generator-backend-hazel.vercel.app/api/v1/post',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(this.form),
+            }
+          );
           await response.json();
           this.$router.push('/');
         } catch (err) {
@@ -138,13 +141,16 @@ export default {
       if (this.form.prompt) {
         try {
           this.generatingImg = true;
-          const response = await fetch('http://localhost:8080/api/v1/dalle', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ prompt: this.form.prompt }),
-          });
+          const response = await fetch(
+            'https://ai-image-generator-backend-hazel.vercel.app/api/v1/dalle',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ prompt: this.form.prompt }),
+            }
+          );
 
           const data = await response.json();
           this.form = {
